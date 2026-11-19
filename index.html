@@ -152,6 +152,27 @@ h2 { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.6rem); font-weight: 700; line-
 .tag-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto; padding-top: 26px; }
 .tag-row span { padding: .37rem .55rem; border-radius: 7px; font-size: .72rem; background: rgba(255,255,255,.045); color: #bdd0df; }
 
+.exp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.exp-card { position: relative; min-height: 290px; padding: 26px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); overflow: hidden; display: flex; flex-direction: column; outline: none; transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease; }
+.exp-card.visible:hover, .exp-card.visible:focus-within, .exp-card.visible:focus { border-color: rgba(97,232,195,.4); transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,.3); }
+.exp-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.exp-date { color: #7f94a8; font-size: .82rem; }
+.exp-tag { padding: .3rem .55rem; border-radius: 8px; border: 1px solid rgba(255,255,255,.1); color: #a9b9c8; font-size: .7rem; }
+.exp-card h3 { margin: 26px 0 6px; font-size: 1.35rem; letter-spacing: -.025em; }
+.exp-company { margin: 0; color: var(--accent); font-size: .92rem; }
+.exp-keys { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; }
+.exp-keys span { padding: .35rem .6rem; border-radius: 8px; background: rgba(97,232,195,.07); border: 1px solid rgba(97,232,195,.12); color: #bfeee1; font-size: .74rem; }
+.exp-hint { margin-top: auto; padding-top: 20px; color: #6f8498; font-size: .76rem; letter-spacing: .04em; }
+.exp-hint::after { content: " →"; color: var(--accent); }
+.exp-details { position: absolute; inset: 0; padding: 26px; background: linear-gradient(160deg, #123049, #0c1c2c); display: flex; flex-direction: column; justify-content: center; opacity: 0; transform: translateY(14px); transition: opacity .3s ease, transform .3s ease; pointer-events: none; }
+.exp-details h4 { margin: 0 0 14px; font-family: "Space Grotesk", Inter, sans-serif; font-size: 1.1rem; color: var(--accent); }
+.exp-details ul { margin: 0; padding-left: 1.1rem; color: #c9d6e1; font-size: .92rem; }
+.exp-details li { margin: .35rem 0; }
+.exp-details p { margin: 0; color: #c9d6e1; font-size: .95rem; line-height: 1.65; }
+.impact-card.exp-card h3 { margin: 40px 0 0; font-size: 1.4rem; }
+.impact-card .tag-row { margin-top: 20px; padding-top: 0; }
+.exp-card:hover .exp-details, .exp-card:focus .exp-details, .exp-card:focus-within .exp-details { opacity: 1; transform: none; }
+@media (hover: none) { .exp-hint { display: none; } .exp-hint + .exp-details { position: static; opacity: 1; transform: none; padding: 18px 0 0; background: none; } .exp-details h4 { display: none; } }
 .timeline { border-top: 1px solid var(--line); }
 .timeline-item { display: grid; grid-template-columns: 230px 1fr; gap: 60px; padding: 42px 0; border-bottom: 1px solid var(--line); }
 .timeline-date { color: #7f94a8; font-size: .9rem; padding-top: 5px; }
@@ -166,8 +187,22 @@ h2 { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.6rem); font-weight: 700; line-
 .skill-panel { padding: 28px; border-radius: 18px; border: 1px solid var(--line); background: rgba(255,255,255,.025); }
 .skill-panel h3 { margin: 0 0 20px; font-size: 1.15rem; }
 .skill-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
-.skill-cloud span { padding: .56rem .7rem; border-radius: 9px; background: #142537; border: 1px solid rgba(255,255,255,.06); color: #c3d1dc; font-size: .8rem; }
+.skill-cloud > span { padding: .56rem .7rem; border-radius: 9px; background: #142537; border: 1px solid rgba(255,255,255,.06); color: #c3d1dc; font-size: .8rem; }
 
+.skill-panel { position: relative; overflow: hidden; transition: border-color .25s ease, box-shadow .25s ease; }
+.skill-panel.showing { border-color: rgba(97,232,195,.4); box-shadow: 0 20px 50px rgba(0,0,0,.3); }
+.skill-cloud .skill { cursor: default; outline: none; transition: border-color .2s ease, background .2s ease, color .2s ease; }
+.skill-cloud .skill:hover, .skill-cloud .skill:focus { border-color: rgba(97,232,195,.45); background: #17304a; color: #fff; }
+.skill-tip { display: none; }
+.skill-hint { display: block; margin-top: 18px; color: #6f8498; font-size: .76rem; letter-spacing: .04em; }
+.skill-hint::after { content: " →"; color: var(--accent); }
+.skill-overlay { position: absolute; inset: 0; padding: 28px; background: linear-gradient(160deg, #123049, #0c1c2c); display: flex; flex-direction: column; justify-content: flex-start; opacity: 0; transform: translateY(14px); transition: opacity .3s ease, transform .3s ease; pointer-events: none; color: #c9d6e1; }
+.skill-panel.showing .skill-overlay { opacity: 1; transform: none; }
+.skill-overlay .overlay-cat { color: #7f94a8; font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; }
+.skill-overlay strong { display: block; margin: 8px 0 18px; padding-bottom: 14px; border-bottom: 1px solid rgba(97,232,195,.18); font-family: "Space Grotesk", Inter, sans-serif; font-size: clamp(1.4rem, 2.2vw, 1.8rem); letter-spacing: -.02em; color: var(--accent); }
+.skill-overlay ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; font-size: 1.02rem; }
+.skill-overlay li { position: relative; padding: 12px 14px 12px 38px; border-radius: 12px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); color: #dbe6ee; }
+.skill-overlay li::before { content: "✓"; position: absolute; left: 14px; top: 12px; color: var(--accent); font-weight: 800; }
 .credentials-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 80px; align-items: start; }
 .credential-list { border-top: 1px solid var(--line); }
 .credential-item { display: grid; grid-template-columns: 1fr 1.4fr; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--line); }
@@ -177,7 +212,7 @@ h2 { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.6rem); font-weight: 700; line-
 .education-section { padding-top: 12px; }
 .education-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 .services-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; align-items: stretch; }
-.services-overview { padding: 32px; border-radius: 20px; border: 1px solid var(--line); background: var(--surface); }
+.services-overview.skill-panel { padding: 32px; } .services-overview { padding: 32px; border-radius: 20px; border: 1px solid var(--line); background: var(--surface); }
 .services-overview p { margin: 0 0 26px; color: #b9c7d4; font-size: 1.05rem; }
 .services-overview h3, .services-facts h3 { margin: 0 0 16px; font-size: 1rem; color: var(--text); }
 .services-facts { display: grid; gap: 18px; }
@@ -193,21 +228,30 @@ h2 { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.6rem); font-weight: 700; line-
 .contact-card { padding: 52px; border-radius: 28px; background: linear-gradient(135deg, #10283a, #0e1d2d 65%); border: 1px solid rgba(97,232,195,.18); display: grid; grid-template-columns: 1.25fr .75fr; gap: 60px; align-items: center; box-shadow: var(--shadow); }
 .contact-card h2 { margin: 0; max-width: 780px; font-size: clamp(2rem, 3.6vw, 3.3rem); line-height: 1.06; letter-spacing: -.035em; }
 .contact-card p:not(.eyebrow) { color: #aebdca; margin: 20px 0 0; }
-.contact-actions { display: flex; flex-direction: column; align-items: stretch; gap: 11px; }
+.contact-actions { display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.contact-socials { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+.contact-socials .social-icon { width: 56px; height: 56px; border-radius: 50%; }
+.contact-socials .social-icon .icon { width: 26px; height: 26px; }
+.social-icon.social-phone:hover, .social-icon.social-phone:focus-visible { border-color: rgba(97,232,195,.55); box-shadow: 0 0 0 4px rgba(97,232,195,.1), 0 10px 26px rgba(97,232,195,.2); }
 .icon { width: 1.2em; height: 1.2em; flex-shrink: 0; }
 .btn .icon { margin-right: .5rem; }
-.social-links { display: flex; align-items: center; gap: .9rem; }
-.contact-actions .social-links { justify-content: center; margin-top: 4px; }
-.social-icon { display: inline-flex; align-items: center; justify-content: center; transition: transform .18s ease, opacity .18s ease; }
-.social-icon .icon { width: 30px; height: 30px; }
-.social-icon.small .icon { width: 20px; height: 20px; }
-.social-icon:hover { transform: translateY(-2px); opacity: .85; }
-.footer-links { display: flex; align-items: center; gap: 1.2rem; }
-.footer-links a { display: inline-flex; align-items: center; gap: .45rem; }
+.social-icon { position: relative; width: 46px; height: 46px; display: inline-grid; place-items: center; border-radius: 50%; background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.12); box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 6px 18px rgba(0,0,0,.25); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease, background .2s ease; }
+.social-icon .icon { display: block; width: 22px; height: 22px; margin: 0; }
+.social-icon.social-mail .icon { width: 24px; }
+.social-icon.social-mail:hover, .social-icon.social-mail:focus-visible { border-color: rgba(234,67,53,.55); box-shadow: 0 0 0 4px rgba(234,67,53,.12), 0 10px 26px rgba(234,67,53,.22); }
+.social-icon.social-linkedin:hover, .social-icon.social-linkedin:focus-visible { border-color: rgba(10,102,194,.7); box-shadow: 0 0 0 4px rgba(10,102,194,.15), 0 10px 26px rgba(10,102,194,.3); }
+.social-icon.social-github:hover, .social-icon.social-github:focus-visible { border-color: rgba(255,255,255,.5); box-shadow: 0 0 0 4px rgba(255,255,255,.08), 0 10px 26px rgba(255,255,255,.12); }
+a.social-icon:hover, a.social-icon:focus-visible { transform: translateY(-3px); border-color: rgba(97,232,195,.4); outline: none; }
+.footer-links .social-icon { box-shadow: none; }
+.social-icon.small { width: 38px; height: 38px; border-radius: 50%; }
+.social-icon.small .icon { width: 18px; height: 18px; }
+.footer-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .8rem; }
 .text-link { color: var(--accent); font-weight: 760; margin-top: 6px; text-align: center; }
 
 .site-footer { border-top: 1px solid var(--line); padding: 28px 0; color: #7e91a4; font-size: .86rem; }
-.footer-wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.footer-wrap { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px; }
+.footer-center { grid-column: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.back-to-top { grid-column: 3; justify-self: end; }
 .footer-wrap p { margin: 0; }
 .footer-wrap a:hover { color: var(--text); }
 
@@ -225,7 +269,7 @@ h2 { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.6rem); font-weight: 700; line-
   .hero { min-height: auto; }
   .hero-grid, .split-grid, .credentials-grid, .contact-card { grid-template-columns: 1fr; gap: 48px; }
   .hero-card { max-width: 660px; }
-  .three-col, .education-grid { grid-template-columns: 1fr 1fr; }
+  .three-col, .education-grid, .exp-grid { grid-template-columns: 1fr 1fr; }
   .services-grid { grid-template-columns: 1fr; }
   .timeline-item { grid-template-columns: 160px 1fr; gap: 30px; }
 }
@@ -238,13 +282,15 @@ h2 { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.6rem); font-weight: 700; line-
   .hero { padding: 82px 0 86px; }
   .hero h1 { font-size: clamp(3rem, 15vw, 4.8rem); }
   .hero-lede { font-size: 1.02rem; }
-  .metric-grid, .three-col, .education-grid, .skills-grid { grid-template-columns: 1fr; }
+  .skill-panel { min-height: 320px; }
+  .metric-grid, .three-col, .education-grid, .skills-grid, .exp-grid { grid-template-columns: 1fr; }
   .metric-card { min-height: 110px; }
   .timeline-item { grid-template-columns: 1fr; gap: 10px; padding: 32px 0; }
   .role-heading { flex-direction: column; }
   .credential-item { grid-template-columns: 1fr; gap: 7px; }
   .contact-card { padding: 32px 24px; }
-  .footer-wrap { flex-direction: column; align-items: flex-start; }
+  .footer-wrap { grid-template-columns: 1fr; justify-items: center; }
+  .footer-center, .back-to-top { grid-column: 1; justify-self: center; }
 }
 
 </style>
@@ -284,13 +330,9 @@ h2 { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.6rem); font-weight: 700; line-
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#services">View my services</a>
-            <div class="social-links">
-              <a class="social-icon" href="mailto:stevenjugushh@gmail.com" aria-label="Email stevenjugushh@gmail.com" title="stevenjugushh@gmail.com"><svg class="icon" viewBox="52 42 88 66" aria-hidden="true" focusable="false"><path fill="#4285f4" d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6"/><path fill="#34a853" d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15"/><path fill="#fbbc04" d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2"/><path fill="#ea4335" d="M72 74V48l24 18 24-18v26L96 92"/><path fill="#c5221f" d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2"/></svg></a>
-              <a class="social-icon" href="https://www.linkedin.com/in/stephen-njuguna-9b98841b8/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in new tab)" title="LinkedIn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" d="M7.12 20.45H3.56V9h3.56v11.45zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28z"/></svg></a>
-            </div>
           </div>
           <div class="hero-meta" aria-label="Professional highlights">
-            <span>Remote or in person · Nairobi County, Kenya</span>
+            <span>Remote or In Person (Globally)</span>
             <span>Support Lead at Atlancis Technologies</span>
           </div>
         </div>
@@ -319,7 +361,7 @@ h2 { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.6rem); font-weight: 700; line-
             <span>ITSM</span>
             <span>MySupport</span>
             <span>CMDB</span>
-            <span>OTRS</span>
+            <span>Docker</span>
             <span>Linux</span>
             <span>Cloud</span>
           </div>
@@ -354,17 +396,18 @@ h2 { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.6rem); font-weight: 700; line-
           <h2>Practical IT consulting and <span class="highlight">technical support solutions.</span></h2>
         </div>
         <div class="services-grid">
-          <div class="services-overview reveal">
+          <div class="services-overview skill-panel reveal">
             <p>I provide practical IT consulting and technical support solutions focused on reliable services, streamlined processes and improved customer experience.</p>
             <h3>Services provided</h3>
             <div class="skill-cloud">
-              <span>IT Consulting</span><span>Technical Support</span><span>Cloud Management</span><span>Change Management</span><span>Project Management</span><span>Enterprise Content Management</span><span>Software Testing</span><span>Custom Software Development</span><span>Web Development</span><span>UX Research</span>
+              <span class="skill" tabindex="0">IT Consulting<span class="skill-tip"><strong>IT Consulting</strong><ul><li>Assess IT environments and gaps</li><li>Recommend practical improvements</li><li>Roadmaps aligned to business goals</li></ul></span></span><span class="skill" tabindex="0">Technical Support<span class="skill-tip"><strong>Technical Support</strong><ul><li>L1–L3 support setup and delivery</li><li>24/7 SLA-driven support operations</li><li>Escalation and incident handling</li></ul></span></span><span class="skill" tabindex="0">Cloud Management<span class="skill-tip"><strong>Cloud Management</strong><ul><li>Manage and monitor cloud services</li><li>Linux and container workloads</li><li>Availability and performance tuning</li></ul></span></span><span class="skill" tabindex="0">Change Management<span class="skill-tip"><strong>Change Management</strong><ul><li>Set up change enablement &amp; CAB</li><li>Risk and impact assessment</li><li>Safe, well-communicated releases</li></ul></span></span><span class="skill" tabindex="0">Project Management<span class="skill-tip"><strong>Project Management</strong><ul><li>Plan scope, timelines and resources</li><li>Coordinate teams and stakeholders</li><li>Track delivery and report progress</li></ul></span></span><span class="skill" tabindex="0">Enterprise Content Management<span class="skill-tip"><strong>Enterprise Content Management</strong><ul><li>Organise documentation and knowledge bases</li><li>Process and SOP documentation</li><li>Controlled, auditable records</li></ul></span></span><span class="skill" tabindex="0">Software Testing<span class="skill-tip"><strong>Software Testing</strong><ul><li>Functional and user acceptance testing</li><li>Validate releases and fixes</li><li>Document defects clearly</li></ul></span></span><span class="skill" tabindex="0">Custom Software Development<span class="skill-tip"><strong>Custom Software Development</strong><ul><li>Front-end &amp; back-end customization</li><li>Ticketing system enhancements</li><li>Ruby on Rails, React and Perl</li></ul></span></span><span class="skill" tabindex="0">Web Development<span class="skill-tip"><strong>Web Development</strong><ul><li>Responsive websites and web apps</li><li>Front-end and back-end builds</li><li>Deployment with Docker &amp; GitHub</li></ul></span></span><span class="skill" tabindex="0">UX Research<span class="skill-tip"><strong>UX Research</strong><ul><li>Gather user feedback</li><li>Improve support system usability</li><li>Simplify customer journeys</li></ul></span></span>
             </div>
-          </div>
+          <span class="skill-hint">Hover over a service for details</span>
+          <div class="skill-overlay" aria-live="polite"></div>
+        </div>
           <div class="services-facts reveal">
-            <div class="fact-card"><span>Availability</span><p>Remote or in person (Nairobi County, Kenya)</p></div>
-            <div class="fact-card"><span>Pricing</span><p>Contact for pricing</p></div>
-            <a class="btn btn-primary" href="mailto:stevenjugushh@gmail.com">Request a quote</a>
+            <div class="fact-card"><span>Availability</span><p>Remote or In Person (Globally)</p></div>
+            <a class="btn btn-primary" href="mailto:stevenjugushh@gmail.com">Get in touch</a>
           </div>
         </div>
       </div>
@@ -377,23 +420,35 @@ h2 { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.6rem); font-weight: 700; line-
           <h2>Operational improvements that <span class="highlight">scale beyond a single ticket.</span></h2>
         </div>
         <div class="cards three-col">
-          <article class="impact-card reveal">
+          <article class="impact-card exp-card reveal" tabindex="0">
             <div class="card-number">01</div>
             <h3>Centralized support function</h3>
-            <p>Setting up a centralized support function for Servernah Cloud and Enterprise Services, building the ITSM foundation from the ground up.</p>
             <div class="tag-row"><span>Service Delivery</span><span>ITSM</span><span>Operations</span></div>
+            <span class="exp-hint">Hover for details</span>
+            <div class="exp-details">
+              <h4>Centralized support function</h4>
+              <p>Setting up a centralized support function for Servernah Cloud and Enterprise Services, building the ITSM foundation from the ground up.</p>
+            </div>
           </article>
-          <article class="impact-card reveal">
+          <article class="impact-card exp-card reveal" tabindex="0">
             <div class="card-number">02</div>
             <h3>SLA-driven 24/7 support</h3>
-            <p>Leading L1 Support Engineers around the clock with a mission to hit 95%+ SLA compliance, reduce recurring incidents and build a culture of continuous improvement.</p>
             <div class="tag-row"><span>SLA</span><span>Leadership</span><span>CSI</span></div>
+            <span class="exp-hint">Hover for details</span>
+            <div class="exp-details">
+              <h4>SLA-driven 24/7 support</h4>
+              <p>Leading L1 Support Engineers around the clock with a mission to hit 95%+ SLA compliance, reduce recurring incidents and build a culture of continuous improvement.</p>
+            </div>
           </article>
-          <article class="impact-card reveal">
+          <article class="impact-card exp-card reveal" tabindex="0">
             <div class="card-number">03</div>
             <h3>Auditable, compliant operations</h3>
-            <p>Governing the MySupport platform and CMDB to keep operations auditable, scalable and compliant with ISO 27001 &amp; ISO 9001 standards.</p>
             <div class="tag-row"><span>CMDB</span><span>ISO 27001</span><span>ISO 9001</span></div>
+            <span class="exp-hint">Hover for details</span>
+            <div class="exp-details">
+              <h4>Auditable, compliant operations</h4>
+              <p>Governing the MySupport platform and CMDB to keep operations auditable, scalable and compliant with ISO 27001 &amp; ISO 9001 standards.</p>
+            </div>
           </article>
         </div>
       </div>
@@ -405,91 +460,71 @@ h2 { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.6rem); font-weight: 700; line-
           <p class="eyebrow">Experience</p>
           <h2>From frontline support to <span class="highlight">leading service operations.</span></h2>
         </div>
-        <div class="timeline">
-          <article class="timeline-item reveal">
-            <div class="timeline-date">Jan 2026 — Present<br />Kenya · On-site</div>
-            <div class="timeline-content">
-              <div class="role-heading">
-                <div><h3>Support Lead</h3><p>Atlancis Technologies · Full-time</p></div>
-                <span>Leadership</span>
-              </div>
-              <ul>
-                <li>Setting up a centralized support function for Servernah Cloud and Enterprise Services — building the ITSM foundation from the ground up.</li>
-                <li>Go-to for service governance, change enablement and operational excellence across L1–L3 support tiers, ensuring reliable, SLA-driven support 24 hours a day.</li>
-                <li>Leading L1 Support Engineers in a 24/7 operation with a mission to hit 95%+ SLA compliance, reduce recurring incidents and build a culture of continuous improvement.</li>
-                <li>Owning ITSM practices end-to-end — Incident, Problem, Change and Request Management — while governing the MySupport platform and CMDB for auditable, scalable operations compliant with ISO 27001 &amp; ISO 9001.</li>
-                <li>Growing a high-performing team, creating clear career paths and delivering service quality customers can count on.</li>
-              </ul>
+        <div class="exp-grid">
+          <article class="exp-card reveal" tabindex="0">
+            <div class="exp-top"><span class="exp-date">Jan 2026 — Present</span><span class="exp-tag">Leadership</span></div>
+            <h3>Support Lead</h3>
+            <p class="exp-company">Atlancis Technologies</p>
+            <div class="exp-keys"><span>ITSM</span><span>CAB Chair</span><span>ISO Audits</span></div>
+            <span class="exp-hint">Hover for details</span>
+            <div class="exp-details">
+              <h4>Support Lead</h4>
+              <ul><li>Built a centralized 24/7 support function, targeting 95%+ SLA</li><li>Chair the Change Advisory Board (CAB)</li><li>Define &amp; train operational processes across departments</li><li>Train teams on ITIL and support system usage</li><li>ISO internal auditor and auditee in external audits</li></ul>
             </div>
           </article>
-
-          <article class="timeline-item reveal">
-            <div class="timeline-date">Nov 2023 — Present</div>
-            <div class="timeline-content">
-              <div class="role-heading">
-                <div><h3>Support System Admin</h3><p>Atlancis Technologies</p></div>
-                <span>Systems</span>
-              </div>
-              <ul>
-                <li>Administer and optimize the OTRS-based ticketing and service desk platform — users, queues, permissions, workflows and automation.</li>
-                <li>Automate support workflows and ticket routing to improve response times and SLA performance.</li>
-              </ul>
+          <article class="exp-card reveal" tabindex="0">
+            <div class="exp-top"><span class="exp-date">Nov 2023 — Present</span><span class="exp-tag">Systems</span></div>
+            <h3>Support System Admin</h3>
+            <p class="exp-company">Atlancis Technologies</p>
+            <div class="exp-keys"><span>Docker</span><span>Customization</span><span>Training</span></div>
+            <span class="exp-hint">Hover for details</span>
+            <div class="exp-details">
+              <h4>Support System Admin</h4>
+              <ul><li>Deployed the support system on Docker</li><li>Front-end &amp; back-end customization</li><li>Defined roles, processes and troubleshooting</li><li>Point of contact for consultation</li><li>Trained users on the support system</li></ul>
             </div>
           </article>
-
-          <article class="timeline-item reveal">
-            <div class="timeline-date">Sep 2023 — Present<br />On-site</div>
-            <div class="timeline-content">
-              <div class="role-heading">
-                <div><h3>DevOps Engineer</h3><p>Atlancis Technologies · Full-time</p></div>
-                <span>Technical</span>
-              </div>
-              <ul>
-                <li>Linux production support, server monitoring, upgrades, security and performance optimization across cloud environments.</li>
-                <li>ISO Champion and ISO 27001 Auditor, supporting ISMS implementation and audit readiness.</li>
-                <li>Technical contact for enterprise customers, delivering training and documentation.</li>
-              </ul>
+          <article class="exp-card reveal" tabindex="0">
+            <div class="exp-top"><span class="exp-date">Sep 2023 — Present</span><span class="exp-tag">Technical</span></div>
+            <h3>DevOps Engineer</h3>
+            <p class="exp-company">Atlancis Technologies</p>
+            <div class="exp-keys"><span>Docker</span><span>Jira</span><span>GitHub</span></div>
+            <span class="exp-hint">Hover for details</span>
+            <div class="exp-details">
+              <h4>DevOps Engineer</h4>
+              <ul><li>System admin for the support system</li><li>Deployments with Docker, Jira &amp; GitHub</li><li>Linux production support and monitoring</li><li>ISO Champion &amp; ISO 27001 Auditor</li><li>Point of contact for consultation</li></ul>
             </div>
           </article>
-
-          <article class="timeline-item reveal">
-            <div class="timeline-date">Mar 2023 — Sep 2023<br />Kenya · On-site</div>
-            <div class="timeline-content">
-              <div class="role-heading">
-                <div><h3>Software Engineer</h3><p>Atlancis Technologies · Internship</p></div>
-                <span>Engineering</span>
-              </div>
-              <ul>
-                <li>Built and refined web applications using Ruby on Rails, HTML and related technologies while learning world-class IT solution delivery.</li>
-              </ul>
+          <article class="exp-card reveal" tabindex="0">
+            <div class="exp-top"><span class="exp-date">Mar 2023 — Sep 2023</span><span class="exp-tag">Engineering</span></div>
+            <h3>Software Engineer Intern</h3>
+            <p class="exp-company">Atlancis Technologies</p>
+            <div class="exp-keys"><span>Ruby on Rails</span><span>HTML</span><span>Web Apps</span></div>
+            <span class="exp-hint">Hover for details</span>
+            <div class="exp-details">
+              <h4>Software Engineer Intern</h4>
+              <ul><li>Built and refined web applications</li><li>Hands-on enterprise IT delivery</li></ul>
             </div>
           </article>
-
-          <article class="timeline-item reveal">
-            <div class="timeline-date">Mar 2019 — Aug 2020</div>
-            <div class="timeline-content">
-              <div class="role-heading">
-                <div><h3>Customer Support Lead & Training</h3><p>Givewatts East Africa</p></div>
-                <span>Customer Operations</span>
-              </div>
-              <ul>
-                <li>Supported regional teams across multiple counties and delivered customer service and system training.</li>
-                <li>Produced operational reports, analyzed support trends and improved field support effectiveness.</li>
-              </ul>
+          <article class="exp-card reveal" tabindex="0">
+            <div class="exp-top"><span class="exp-date">Mar 2019 — Aug 2020</span><span class="exp-tag">Customer Ops</span></div>
+            <h3>Customer Support Lead &amp; Training</h3>
+            <p class="exp-company">Givewatts East Africa</p>
+            <div class="exp-keys"><span>Training</span><span>Reporting</span><span>Field Support</span></div>
+            <span class="exp-hint">Hover for details</span>
+            <div class="exp-details">
+              <h4>Customer Support Lead &amp; Training</h4>
+              <ul><li>Supported regional teams across counties</li><li>Delivered customer and system training</li><li>Analyzed support trends</li></ul>
             </div>
           </article>
-
-          <article class="timeline-item reveal">
-            <div class="timeline-date">Nov 2017 — Mar 2019</div>
-            <div class="timeline-content">
-              <div class="role-heading">
-                <div><h3>Call Center & IT Support</h3><p>Apex Collection Africa</p></div>
-                <span>IT Support</span>
-              </div>
-              <ul>
-                <li>Provided first-line support for hardware, software, networks, CRM and ticket management processes.</li>
-                <li>Configured workstations, printers and call-centre infrastructure and delivered user onboarding.</li>
-              </ul>
+          <article class="exp-card reveal" tabindex="0">
+            <div class="exp-top"><span class="exp-date">Nov 2017 — Mar 2019</span><span class="exp-tag">IT Support</span></div>
+            <h3>Call Center &amp; IT Support</h3>
+            <p class="exp-company">Apex Collection Africa</p>
+            <div class="exp-keys"><span>First-line Support</span><span>CRM</span><span>Onboarding</span></div>
+            <span class="exp-hint">Hover for details</span>
+            <div class="exp-details">
+              <h4>Call Center &amp; IT Support</h4>
+              <ul><li>Hardware, software and network support</li><li>Workstation and call-centre setup</li><li>User onboarding</li></ul>
             </div>
           </article>
         </div>
@@ -506,26 +541,34 @@ h2 { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.6rem); font-weight: 700; line-
           <div class="skill-panel reveal">
             <h3>Modern Workplace</h3>
             <div class="skill-cloud">
-              <span>Microsoft 365</span><span>Intune</span><span>Entra ID / Azure AD</span><span>Exchange Online</span><span>Microsoft Teams</span><span>Windows 11</span><span>Microsoft Azure</span>
+              <span class="skill" tabindex="0">Microsoft 365<span class="skill-tip"><strong>Microsoft 365</strong><ul><li>User &amp; licence administration</li><li>Tenant configuration and support</li><li>Troubleshoot M365 apps and access</li></ul></span></span><span class="skill" tabindex="0">Intune<span class="skill-tip"><strong>Intune</strong><ul><li>Enrol and manage devices</li><li>Configure compliance &amp; configuration policies</li><li>Deploy apps and updates</li></ul></span></span><span class="skill" tabindex="0">Entra ID / Azure AD<span class="skill-tip"><strong>Entra ID / Azure AD</strong><ul><li>Manage users, groups and roles</li><li>Conditional Access &amp; MFA setup</li><li>SSO and identity troubleshooting</li></ul></span></span><span class="skill" tabindex="0">Exchange Online<span class="skill-tip"><strong>Exchange Online</strong><ul><li>Mailbox &amp; shared mailbox management</li><li>Mail flow rules and troubleshooting</li><li>Distribution lists and permissions</li></ul></span></span><span class="skill" tabindex="0">Microsoft Teams<span class="skill-tip"><strong>Microsoft Teams</strong><ul><li>Teams &amp; channel administration</li><li>Policies, meetings and calling setup</li><li>User support and adoption</li></ul></span></span><span class="skill" tabindex="0">Windows 11<span class="skill-tip"><strong>Windows 11</strong><ul><li>Deployment and configuration</li><li>Endpoint troubleshooting</li><li>Updates, security and hardening</li></ul></span></span><span class="skill" tabindex="0">Microsoft Azure<span class="skill-tip"><strong>Microsoft Azure</strong><ul><li>Manage cloud resources</li><li>Monitor services and costs</li><li>Support cloud workloads</li></ul></span></span>
             </div>
+            <span class="skill-hint">Hover over a skill for details</span>
+            <div class="skill-overlay" aria-live="polite"></div>
           </div>
           <div class="skill-panel reveal">
             <h3>Service Operations</h3>
             <div class="skill-cloud">
-              <span>Incident Management</span><span>Problem Management</span><span>Change Enablement</span><span>SLA Management</span><span>Major Incidents</span><span>RCA</span><span>Continuous Improvement</span><span>CMDB</span><span>NOC Operations</span><span>ISO 27001 / ISO 9001</span>
+              <span class="skill" tabindex="0">Incident Management<span class="skill-tip"><strong>Incident Management</strong><ul><li>Log, prioritise and resolve incidents</li><li>Drive SLA-based escalation</li><li>Keep customers informed</li></ul></span></span><span class="skill" tabindex="0">Problem Management<span class="skill-tip"><strong>Problem Management</strong><ul><li>Identify recurring issues</li><li>Track known errors</li><li>Drive permanent fixes</li></ul></span></span><span class="skill" tabindex="0">Change Enablement<span class="skill-tip"><strong>Change Enablement</strong><ul><li>Assess risk and impact of changes</li><li>Plan and schedule safe releases</li><li>Post-implementation reviews</li></ul></span></span><span class="skill" tabindex="0">SLA Management<span class="skill-tip"><strong>SLA Management</strong><ul><li>Define and track SLAs &amp; KPIs</li><li>Report on performance</li><li>Act on breaches early</li></ul></span></span><span class="skill" tabindex="0">Major Incidents<span class="skill-tip"><strong>Major Incidents</strong><ul><li>Lead major incident response</li><li>Coordinate engineering teams</li><li>Stakeholder communication</li></ul></span></span><span class="skill" tabindex="0">RCA<span class="skill-tip"><strong>RCA</strong><ul><li>Run root cause analysis</li><li>Document findings and actions</li><li>Prevent recurrence</li></ul></span></span><span class="skill" tabindex="0">Continuous Improvement<span class="skill-tip"><strong>Continuous Improvement</strong><ul><li>Analyse trends and feedback</li><li>Improve processes and workflows</li><li>Measure results</li></ul></span></span><span class="skill" tabindex="0">CAB<span class="skill-tip"><strong>CAB</strong><ul><li>Chair the Change Advisory Board</li><li>Review and approve changes</li><li>Balance risk and delivery speed</li></ul></span></span><span class="skill" tabindex="0">ITIL Training<span class="skill-tip"><strong>ITIL Training</strong><ul><li>Train teams on ITIL practices</li><li>Build process awareness</li><li>Onboard new engineers</li></ul></span></span><span class="skill" tabindex="0">Internal Audit<span class="skill-tip"><strong>Internal Audit</strong><ul><li>Conduct ISO internal audits</li><li>Gather evidence and findings</li><li>Prepare for external audits</li></ul></span></span><span class="skill" tabindex="0">CMDB<span class="skill-tip"><strong>CMDB</strong><ul><li>Design and govern the CMDB</li><li>Map services and dependencies</li><li>Link CIs to ITSM processes</li></ul></span></span><span class="skill" tabindex="0">NOC Operations<span class="skill-tip"><strong>NOC Operations</strong><ul><li>24/7 monitoring and alerting</li><li>Triage and escalate events</li><li>Maintain service availability</li></ul></span></span><span class="skill" tabindex="0">ISO 27001 / ISO 9001<span class="skill-tip"><strong>ISO 27001 / ISO 9001</strong><ul><li>Implement ISMS &amp; QMS controls</li><li>Internal auditor and auditee</li><li>Maintain compliance evidence</li></ul></span></span>
             </div>
+            <span class="skill-hint">Hover over a skill for details</span>
+            <div class="skill-overlay" aria-live="polite"></div>
           </div>
           <div class="skill-panel reveal">
             <h3>Platforms & Engineering</h3>
             <div class="skill-cloud">
-              <span>Znuny / OTRS</span><span>ServiceNow</span><span>Linux</span><span>Docker</span><span>GitLab</span><span>GitHub</span><span>Jira</span><span>MySQL</span><span>Perl</span><span>Ruby on Rails</span><span>React</span>
+              <span class="skill" tabindex="0">ServiceNow<span class="skill-tip"><strong>ServiceNow</strong><ul><li>Ticket and workflow handling</li><li>Service catalogue usage</li><li>Reporting and dashboards</li></ul></span></span><span class="skill" tabindex="0">Linux<span class="skill-tip"><strong>Linux</strong><ul><li>Server administration</li><li>Production support &amp; troubleshooting</li><li>Monitoring, patching and security</li></ul></span></span><span class="skill" tabindex="0">Docker<span class="skill-tip"><strong>Docker</strong><ul><li>Deploy apps in containers</li><li>Deployed the support system on Docker</li><li>Manage images and services</li></ul></span></span><span class="skill" tabindex="0">GitLab<span class="skill-tip"><strong>GitLab</strong><ul><li>Version control</li><li>CI/CD pipelines</li><li>Code collaboration</li></ul></span></span><span class="skill" tabindex="0">GitHub<span class="skill-tip"><strong>GitHub</strong><ul><li>Repositories and version control</li><li>Code reviews and pull requests</li><li>Project collaboration</li></ul></span></span><span class="skill" tabindex="0">Jira<span class="skill-tip"><strong>Jira</strong><ul><li>Track issues and tasks</li><li>Agile boards and sprints</li><li>Delivery reporting</li></ul></span></span><span class="skill" tabindex="0">MySQL<span class="skill-tip"><strong>MySQL</strong><ul><li>Database queries</li><li>Backups and maintenance</li><li>Performance troubleshooting</li></ul></span></span><span class="skill" tabindex="0">Perl<span class="skill-tip"><strong>Perl</strong><ul><li>Ticketing system back-end customization</li><li>Scripting and automation</li></ul></span></span><span class="skill" tabindex="0">Ruby on Rails<span class="skill-tip"><strong>Ruby on Rails</strong><ul><li>Build web applications</li><li>APIs and back-end logic</li></ul></span></span><span class="skill" tabindex="0">React<span class="skill-tip"><strong>React</strong><ul><li>Build front-end interfaces</li><li>Ticketing system UI customization</li></ul></span></span>
             </div>
+            <span class="skill-hint">Hover over a skill for details</span>
+            <div class="skill-overlay" aria-live="polite"></div>
           </div>
           <div class="skill-panel reveal">
             <h3>Leadership</h3>
             <div class="skill-cloud">
-              <span>Team Leadership</span><span>Coaching</span><span>Performance Management</span><span>Workforce Planning</span><span>Shift Scheduling</span><span>Training</span><span>Stakeholder Management</span><span>Client Communication</span><span>Product Support</span><span>CRM</span>
+              <span class="skill" tabindex="0">Team Leadership<span class="skill-tip"><strong>Team Leadership</strong><ul><li>Lead L1 support engineers</li><li>Set goals and priorities</li><li>Build a high-performing culture</li></ul></span></span><span class="skill" tabindex="0">Coaching<span class="skill-tip"><strong>Coaching</strong><ul><li>One-to-one coaching</li><li>Skills development</li><li>Clear career paths</li></ul></span></span><span class="skill" tabindex="0">Performance Management<span class="skill-tip"><strong>Performance Management</strong><ul><li>Set and track KPIs</li><li>Regular feedback and reviews</li><li>Recognise and develop talent</li></ul></span></span><span class="skill" tabindex="0">Workforce Planning<span class="skill-tip"><strong>Workforce Planning</strong><ul><li>Plan staffing for 24/7 coverage</li><li>Balance workloads</li><li>Forecast support demand</li></ul></span></span><span class="skill" tabindex="0">Shift Scheduling<span class="skill-tip"><strong>Shift Scheduling</strong><ul><li>Build shift rotas</li><li>Ensure round-the-clock coverage</li><li>Manage handovers</li></ul></span></span><span class="skill" tabindex="0">Training<span class="skill-tip"><strong>Training</strong><ul><li>ITIL and process training</li><li>Support system usage training</li><li>Train departments on operations</li></ul></span></span><span class="skill" tabindex="0">Stakeholder Management<span class="skill-tip"><strong>Stakeholder Management</strong><ul><li>Align with business and engineering</li><li>Clear reporting to leadership</li><li>Manage expectations</li></ul></span></span><span class="skill" tabindex="0">Client Communication<span class="skill-tip"><strong>Client Communication</strong><ul><li>Clear incident updates</li><li>Customer escalations</li><li>Service reviews</li></ul></span></span><span class="skill" tabindex="0">Product Support<span class="skill-tip"><strong>Product Support</strong><ul><li>Support cloud &amp; enterprise products</li><li>Troubleshoot customer issues</li><li>Feed insights to product teams</li></ul></span></span><span class="skill" tabindex="0">CRM<span class="skill-tip"><strong>CRM</strong><ul><li>Manage customer records</li><li>Track interactions and cases</li><li>Improve customer experience</li></ul></span></span>
             </div>
+            <span class="skill-hint">Hover over a skill for details</span>
+            <div class="skill-overlay" aria-live="polite"></div>
           </div>
         </div>
       </div>
@@ -565,13 +608,14 @@ h2 { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.6rem); font-weight: 700; line-
         <div>
           <p class="eyebrow">Let’s connect</p>
           <h2>Looking for a technical leader who can improve both <span class="highlight">the service and the team behind it?</span></h2>
-          <p>Available remote or in person (Nairobi County, Kenya) for IT consulting, technical support and service delivery engagements. Contact me for pricing.</p>
+          <p>Available remote or in person (globally) for IT consulting, technical support and service delivery engagements.</p>
         </div>
         <div class="contact-actions">
-          <a class="btn btn-outline" href="tel:+254700061479">+254 700 061 479</a>
-          <div class="social-links">
-            <a class="social-icon" href="mailto:stevenjugushh@gmail.com" aria-label="Email stevenjugushh@gmail.com" title="stevenjugushh@gmail.com"><svg class="icon" viewBox="52 42 88 66" aria-hidden="true" focusable="false"><path fill="#4285f4" d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6"/><path fill="#34a853" d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15"/><path fill="#fbbc04" d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2"/><path fill="#ea4335" d="M72 74V48l24 18 24-18v26L96 92"/><path fill="#c5221f" d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2"/></svg></a>
-            <a class="social-icon" href="https://www.linkedin.com/in/stephen-njuguna-9b98841b8/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in new tab)" title="LinkedIn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" d="M7.12 20.45H3.56V9h3.56v11.45zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28z"/></svg></a>
+          <div class="contact-socials">
+            <a class="social-icon social-phone" href="tel:+254700061479" aria-label="Phone: +254 700 061 479" title="Phone: +254 700 061 479"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#61e8c3" d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"/></svg></a>
+            <a class="social-icon social-mail" href="mailto:stevenjugushh@gmail.com" aria-label="Email: stevenjugushh@gmail.com" title="Email: stevenjugushh@gmail.com"><svg class="icon" viewBox="52 42 88 66" aria-hidden="true" focusable="false"><path fill="#4285f4" d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6"/><path fill="#34a853" d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15"/><path fill="#fbbc04" d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2"/><path fill="#ea4335" d="M72 74V48l24 18 24-18v26L96 92"/><path fill="#c5221f" d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2"/></svg></a>
+            <a class="social-icon social-linkedin" href="https://www.linkedin.com/in/stephen-njuguna-9b98841b8/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn: Stephen Njuguna" title="LinkedIn: Stephen Njuguna"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" d="M7.12 20.45H3.56V9h3.56v11.45zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28z"/></svg></a>
+            <a class="social-icon social-github" href="https://github.com/Njambaddev" target="_blank" rel="noopener noreferrer" aria-label="GitHub: @Njambaddev" title="GitHub: @Njambaddev"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#ffffff" d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3"/></svg></a>
           </div>
           <a class="text-link" href="Stephen_Njuguna_Njambi_CV.docx" download>Download my CV →</a>
         </div>
@@ -581,12 +625,15 @@ h2 { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.6rem); font-weight: 700; line-
 
   <footer class="site-footer">
     <div class="container footer-wrap">
-      <p>© <span id="year"></span> Stephen Njuguna Njambi</p>
-      <div class="footer-links">
-        <a class="social-icon small" href="mailto:stevenjugushh@gmail.com" aria-label="Email" title="Email"><svg class="icon" viewBox="52 42 88 66" aria-hidden="true" focusable="false"><path fill="#4285f4" d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6"/><path fill="#34a853" d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15"/><path fill="#fbbc04" d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2"/><path fill="#ea4335" d="M72 74V48l24 18 24-18v26L96 92"/><path fill="#c5221f" d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2"/></svg></a>
-        <a class="social-icon small" href="https://www.linkedin.com/in/stephen-njuguna-9b98841b8/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in new tab)" title="LinkedIn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" d="M7.12 20.45H3.56V9h3.56v11.45zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28z"/></svg></a>
-        <a href="#top">Back to top ↑</a>
+      <div class="footer-center">
+        <div class="footer-links">
+          <a class="social-icon small social-mail" href="mailto:stevenjugushh@gmail.com" aria-label="Email" title="Email"><svg class="icon" viewBox="52 42 88 66" aria-hidden="true" focusable="false"><path fill="#4285f4" d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6"/><path fill="#34a853" d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15"/><path fill="#fbbc04" d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2"/><path fill="#ea4335" d="M72 74V48l24 18 24-18v26L96 92"/><path fill="#c5221f" d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2"/></svg></a>
+          <a class="social-icon small social-linkedin" href="https://www.linkedin.com/in/stephen-njuguna-9b98841b8/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in new tab)" title="LinkedIn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" d="M7.12 20.45H3.56V9h3.56v11.45zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28z"/></svg></a>
+          <a class="social-icon small social-github" href="https://github.com/Njambaddev" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile (opens in new tab)" title="GitHub"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#ffffff" d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3"/></svg></a>
+        </div>
+        <p>© <span id="year"></span> Stephen Njuguna Njambi</p>
       </div>
+      <a class="back-to-top" href="#top">Back to top ↑</a>
     </div>
   </footer>
 
@@ -602,6 +649,23 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 
 revealElements.forEach((element) => observer.observe(element));
+document.querySelectorAll('.skill-panel').forEach((panel) => {
+  const overlay = panel.querySelector('.skill-overlay');
+  if (!overlay) return;
+  const show = (chip) => {
+    overlay.innerHTML = '<span class="overlay-cat">' + panel.querySelector('h3').textContent + '</span>' + chip.querySelector('.skill-tip').innerHTML;
+    panel.classList.add('showing');
+  };
+  const hide = () => panel.classList.remove('showing');
+  panel.querySelectorAll('.skill').forEach((chip) => {
+    chip.addEventListener('mouseenter', () => show(chip));
+    chip.addEventListener('mouseleave', hide);
+    chip.addEventListener('focus', () => show(chip));
+    chip.addEventListener('blur', hide);
+    chip.addEventListener('click', (e) => { e.stopPropagation(); show(chip); });
+  });
+});
+document.addEventListener('click', () => document.querySelectorAll('.skill-panel.showing').forEach((p) => p.classList.remove('showing')));
 document.getElementById('year').textContent = new Date().getFullYear();
 
 </script>
